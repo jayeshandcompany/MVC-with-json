@@ -1,0 +1,154 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" >
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        </script>
+    
+</head>
+<body>
+    <div class="bg-warning align-middle">
+        <form name="TEST" class="login --bs-emphasis-color " content="width=device-width">
+            Please enter name:
+        <input type="text" id="name" name="name" required/>
+        <label id="errtxt1" style="color: darkred;"></label>
+        <br>
+        <br>
+        Please select your gender:
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Gender
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button">Male</button>
+                    <button class="dropdown-item" type="button">Female</button>
+                   
+                </div>
+            </div>
+        <br>
+        <br>
+        Please enter Country:
+        <input type="text" id="country" name="Country" />
+        <label id="errem1" style="color: darkred;"></label>
+        <br>
+        <br>
+        Please enter College:
+        <input type="text" id="college" name="college" required />
+        <label id="errage" style="color: darkred;"></label>
+        <br>
+        <br>
+        Please enter Password:
+        <input type="password" id="password" name="password" required />
+        <label id="errdob" style="color: darkred;"></label>
+        <br /><br />
+        Please confirm Password:
+        <input type="password" id="password1" name="password" required />
+            <label id="errpsd" style="color: darkred;"></label>
+
+        <br>
+
+        <br>
+        Please Enter your Qualifications:
+        <div id="content">
+               <br />
+                @Html.Partial("_try", new StudentModel())
+           
+        </div>
+            <input type="button" value="Add" class="btn btn-info btn-block" onclick="add()" />
+        
+        <br />
+        <br />
+            <input type="button" id="btn" class="btn-success" onclick="validate()" value="Submit" />
+
+        @Html.ActionLink("Show Records","Js","Home")
+
+    </form>
+
+    </div>
+
+    <script>
+
+        
+        var Count = 1;
+       
+
+        function add(){
+            Count++ ;
+            if (Count ==4 ){
+                alert("max allowe")
+                return false
+        
+            }
+            var newPartial = '<br><br><label>  Examination</label><input type = "text" name= "Exam[${Count}].Value" value = "" /> <label> Percentage </label><input type = "text" name="percent[${Count}].Value" value="" /><label>Year</label><input type="text" name="year[${Count}].Value" value= "" /> '
+                $("#content").append(newPartial);
+            
+
+        }
+        function validate()
+        {
+           
+            var Name=$('#name').val();
+            var Gender=$('#gender').val();
+            var Country = $('#country').val();
+            var College=$('#college').val();
+            var Password = $('#password').val();
+            var Password1 = $('#password1').val();
+            var reg = /^[A-Za-z" "]+$/;
+            if (!reg.test(Name))
+            {
+                $('#errtxt1').text("please enter correct name")
+                return false
+            }
+            if (!reg.test(Country)) {
+                $('#errem1').text("please enter correct country")
+                return false
+            }
+            if (!reg.test(College)) {
+                $('#errage').text("please enter correct college")
+                return false
+            }
+            if (Password!=Password1)
+            {
+                $('#errpsd').text("please match your passwords")
+                return false
+            }
+
+            var obj={
+                name :Name,
+                gender:Gender,
+                Country: Country,
+                college:College,
+                password:Password
+
+            }
+
+            var a=JSON.stringify($("form.login").serializeArray())
+            console.log(JSON.parse(a));
+            onSubmit(obj)
+        }
+        function onSubmit(obj) {
+
+            
+            $.ajax({
+                url:"/Home/save",
+                method:"POST",
+                data: obj,
+                success: function(data){
+                    console.log()
+                }
+                
+            });
+
+        }
+
+    </script>
+</body>
+
+</html>

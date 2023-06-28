@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "trial";
+}
+@model WebApplication4.Models.Save;
+<h1>trial</h1>
+ @using (Html.BeginForm())
+{
+    <form method="post">
+    <label> please enter a values: </label>
+    @Html.TextBoxFor(model => model.name,new { htmlAttributes = new { @class = "form-control" } })
+     <button type="submit">Submit</button>
+    </form>
+    
+}
+

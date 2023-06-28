@@ -1,0 +1,107 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<html>
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Home/Result',
+                method: 'GET',
+                success: function (data) {
+                    $.each(data, function (index, value) {
+                        var row = '<tr>' +
+                            '<td>' + value['name'] + '</td>' +
+                            '<td>' + value['gender'] + '</td>' +
+                            '<td>' + value['country'] + '</td>' +
+                            '<td>' + value['college'] + '</td>' +
+                            '</tr>';
+
+                        $('#grid tbody').append(row);
+                    });
+                }
+            });
+        });
+
+        
+            //$.ajax({
+            //$(function() {
+            //    url: '/Home/Result',
+            //    method: 'GET',
+              
+            //    success: function (data) {
+                   
+                    
+            //        $.each(data, function (index, value) {
+            //            var row = '<tr>'
+            //                + '<td>' + value['name'] + '</td>'
+            //                + '<td>' + value['gender'] + '</td>'
+            //                + '<td>' + value['Country'] + '</td>'
+            //                + '<td>' + value['college']+ '</td>';
+
+            //                    $('#grid tbody').append(row);
+            //    });
+            //        //            
+            //        //});
+            //    }
+
+            //});
+            //$.ajax({
+            //  url: '/Home/Result',
+            //  type: 'GET',
+            //  dataType: 'json',
+            //  success: function (data) {
+            // Process the JSON data and update the view
+
+            //    $.each(data,function(index,item){
+            //        var row='<tr>'
+            //        +'<td>'+ item.column1+'</td>'
+            //        + '<td>' + item.column2 + '</td>'
+            //        + '<td>' + item.column3 + '</td>'
+            //                    + '<td>' + item.column4 + '</td>';
+
+            //    $(#grid tbody).append(row);
+
+
+            //  });
+            //}
+
+            //});
+        //});
+
+    </script>
+
+</head>
+    <body>
+    <table id="grid" style="border:solid">
+        <thead>
+            <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Country
+            </th>
+            <th>
+                College
+            </th>
+
+            
+            </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+</body>
+@Html.ActionLink("Back","save","Home")
+
+</html>
+    

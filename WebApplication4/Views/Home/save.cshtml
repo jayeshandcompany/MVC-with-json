@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model WebApplication4.Models.StudentModel;
+
+
+
+@using (Html.BeginForm("save", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <script type="text/javascript">
+        window.onload(function()
+        {
+            alert("Welcome to Student Management System");
+        });
+        
+
+    </script>
+    @Html.AntiForgeryToken()  
+    @if (ViewBag.alertmsg != null)
+    {
+        <script type="text/javascript">
+            
+          alert("@ViewBag.alertmsg");
+            
+        </script>
+    }
+   
+
+
+<div class="text-center" style="border:solid;border-block-color:crimson">
+    
+            <h1><u>Student Form</u></h1>
+
+     <br />
+            <label>name👉: </label>    
+             @Html.TextBoxFor(m => m.name,new{required="required"})
+
+            <br />
+     <label>gender🚹🚺: </label>
+     
+    @Html.RadioButtonFor(m=> m.gender,"Male")Male
+    @Html.RadioButtonFor(m => m.gender, "Female")Female
+
+
+     <br />
+    
+
+     <br />
+     Select Country 🗺️:
+    @Html.DropDownListFor(m => m.Country,
+        new SelectList(Enum.GetValues(typeof(Country1))),"Select Country",new{required="required"})
+    <br />
+    <label>College 🎓:</label>
+            @Html.TextBoxFor(m => m.college,new{required="required"})
+            <br />
+    <br />
+
+   
+    
+    
+    password 🔑:
+            @Html.PasswordFor(m => m.password,"pass")
+     <br />
+     <br>
+        @*@Html.LabelFor(m => m.FileName)*@
+
+    @* @Html.EditorFor(m =>m.File, new{type="file"})*@<br>
+
+
+         <input asp-for="file"/>
+            
+    <input type="submit"value="Save Data💤" style="background-color:lightgreen"/>
+            
+
+            <input type="button" value="Reset " onclick="location.href='@Url.Action("reset", "home")'"style="background-color:orangered" />
+        
+        
+</div>
+
+    <center>
+        <input type="button" value="Show Records" onclick="location.href='@Url.Action("view", "home")'" style="background-color:orangered" />
+    </center>
+    }
+    
+    

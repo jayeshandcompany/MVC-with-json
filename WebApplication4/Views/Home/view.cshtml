@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewData["Title"] = "view";
+}
+@model WebApplication4.Models.StudentModel;
+<!-- Modal -->
+
+@using (Html.BeginForm())
+{
+    <!-- Button trigger modal -->
+    <div class="form-horizontal" role="form">
+    <center><h1>Data </h1></center>
+    @if (1 == 1)
+    {
+        List<StudentModel> da = Model.GetAllstudent();
+        <div>
+            <table class="table" style="border:solid">
+                <tr>
+
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Country
+                    </th>
+                    <th>
+                        College
+                    </th>
+
+                    <th>
+                        Controls
+                    </th>
+                </tr>
+                @foreach (var dr in da)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(dadr =>dr.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(dadr =>dr.gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(dadr =>dr.Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(dadr =>dr.college)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Edit","Editdata",new{id=dr.Id})
+                            |
+                            @Html.ActionLink("Delete","Deletedata",new{id=dr.Id},new{ onclick="return confirm('Are you sure to delete this row?')"} )
+
+                                <p class="AddPopUp" id=dr.id>
+                                    @Html.Label("show")
+                                </p>
+                              
+                        </td>
+
+                    </tr>
+
+
+                }
+                </table>
+                    
+                    <div class="modal fade" id="MyPopUp" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                <div>
+                                    @{
+                                        ViewBag.message = Model.getdata(27);
+                                        Html.RenderPartial("__showdata",new { ViewBag.message });
+                                    }
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+            
+        </div>
+
+       
+
+        
+        
+        
+            
+        }
+        @section Scripts{
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".AddPopUp").click(function (e) {
+
+                    $('#MyPopUp').modal('show');
+                });
+            });
+
+        </script>
+    }
+    </div>
+}
+
+
