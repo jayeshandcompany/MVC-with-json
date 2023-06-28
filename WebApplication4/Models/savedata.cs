@@ -25,6 +25,7 @@ namespace WebApplication4.Models
 
         public int? year { get; set; }
         public int? percent { get; set; }
+        public string? message { get; set; }
 
         public List<StudentModel> GetAllstudent()
         {

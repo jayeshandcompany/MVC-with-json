@@ -1,8 +1,8 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-}
+
+@model WebApplication4.Models.StudentModel;
 <!-- this is trial push-->
 <!DOCTYPE html>
 <html>
@@ -15,6 +15,17 @@
     
 </head>
 <body>
+
+    <div style="color:red">
+
+        @{
+            var message = Context.Items["message"] as string;
+        }
+        @message
+    
+    
+    </div>
+
     <div class="bg-warning align-middle">
         <form name="TEST" class="login --bs-emphasis-color " content="width=device-width">
             Please enter name:
@@ -68,7 +79,7 @@
         <br />
             <input type="button" id="btn" class="btn-success" onclick="validate()" value="Submit" />
 
-        @Html.ActionLink("Show Records","Js","Home")
+        @Html.ActionLink("Show Records","Js","Home",null,new{target="_blank"})
 
     </form>
 

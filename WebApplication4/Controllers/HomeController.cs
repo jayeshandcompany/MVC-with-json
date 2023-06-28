@@ -10,6 +10,9 @@ using WebApplication4.Models;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System.Drawing.Printing;
+using Microsoft.AspNetCore.Mvc.Filters;
+using WebApplication4.Filters;
 
 namespace WebApplication4.Controllers
 {
@@ -171,11 +174,11 @@ namespace WebApplication4.Controllers
             return RedirectToAction("reset");
 
     }
+        [Actionfilter]
         public IActionResult Js()
         {
-            
-           
-            return View("jsonview");    
+            return View("jsonview");
+
         }
          public JsonResult Result()
         {
