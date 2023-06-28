@@ -9,7 +9,7 @@ namespace WebApplication4.Filters
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             string day = DateTime.Now.DayOfWeek.ToString();
-            day = "asfbg";
+            
             
 
             if (day != "Wednesday")
