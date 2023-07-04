@@ -70,7 +70,7 @@
         Please Enter your Qualifications:
         <div id="content">
                <br />
-                @Html.Partial("_try", new StudentModel())
+               
            
         </div>
             <input type="button" value="Add" class="btn btn-info btn-block" onclick="add()" />
@@ -92,15 +92,37 @@
        
 
         function add(){
-            Count++ ;
-            if (Count ==4 ){
-                alert("max allowe")
-                return false
-        
-            }
-            var newPartial = '<br><br><label>  Examination</label><input type = "text" name= "Exam[${Count}].Value" value = "" /> <label> Percentage </label><input type = "text" name="percent[${Count}].Value" value="" /><label>Year</label><input type="text" name="year[${Count}].Value" value= "" /> '
-                $("#content").append(newPartial);
             
+            if (Count ==4)
+            {
+                alert("max 3 are allowed")
+                return false;
+            }
+          
+               
+                    $.ajax({
+                url: '/Home/PartialViewAction', // Replace with the actual path to your partial view
+                        type: 'GET',
+                        dataType: 'html',
+                        success: function (partialViewContent) {
+                            var exam="exam"+Count;
+                             var year="year"+Count;
+                            var per = "per" + Count;
+                    var modified = partialViewContent.replace(/__uniqueidexam__/g, exam)
+                            var modified = modified.replace(/__uniqueidper__/g, per)
+
+                            var modified = modified.replace(/__uniqueidyear__/g, year)
+
+
+                            $('#content').append(modified);
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error fetching partial view:', error);
+                        }
+                    });
+            Count += 1;
+              
+
 
         }
         function validate()
